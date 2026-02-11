@@ -8,27 +8,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         /* ═══════════════════════════════════════════════
-           DESIGN TOKENS — RAMADAN PALETTE
+           DESIGN TOKENS — ISLAMIC RAMADAN PALETTE
         ═══════════════════════════════════════════════ */
         :root {
-            --wood-darkest:  #2C1A10;
-            --wood-dark:     #3E2723;
-            --wood-mid:      #5D4037;
-            --wood-light:    #795548;
-            --wood-grain:    #6D4C41;
+            /* Deep jewel-tone backgrounds */
+            --ink:           #0A0F1E;
+            --panel-bg-1:    #0D1B2A;
+            --panel-bg-2:    #0B2240;
+            --panel-bg-3:    #071526;
 
+            /* Gold spectrum */
             --gold-bright:   #FFD700;
-            --gold-mid:      #FFC107;
-            --gold-dark:     #E65100;
-            --gold-glow:     rgba(255, 215, 0, 0.45);
+            --gold-mid:      #F0A500;
+            --gold-warm:     #C8860A;
+            --gold-dark:     #7A4F00;
+            --gold-glow:     rgba(255, 215, 0, 0.50);
+            --gold-glow-soft:rgba(255, 215, 0, 0.15);
 
-            --cream:         #FFF8E1;
-            --text-on-wood:  #FFE0B2;
-            --red-alert:     #FF5252;
-            --green-ok:      #66BB6A;
+            /* Emerald accent */
+            --emerald:       #1A6B4A;
+            --emerald-light: #26A96C;
 
-            --shadow-heavy:  rgba(0,0,0,0.70);
-            --shadow-mid:    rgba(0,0,0,0.45);
+            /* Text */
+            --cream:         #FFF8DC;
+            --parchment:     #F5DEB3;
+            --text-muted:    rgba(255,220,120,0.55);
+
+            /* Alerts */
+            --red-alert:     #FF4444;
+
+            /* Shadows */
+            --shadow-deep:   rgba(0,0,0,0.85);
+            --shadow-mid:    rgba(0,0,0,0.50);
         }
 
         /* ═══════════════════════════════════════════════
@@ -48,7 +59,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: var(--wood-darkest);
+            background: var(--ink);
             font-family: 'Fredoka', sans-serif;
         }
 
@@ -69,59 +80,88 @@
             position: fixed;
             inset: 0;
             z-index: 999;
-            background: var(--wood-darkest);
+            background:
+                radial-gradient(ellipse at 50% 40%, #0d2a4a 0%, #060d18 70%);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 18px;
             transition: opacity 0.5s ease;
         }
 
-        #loader.fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
+        #loader.fade-out { opacity: 0; pointer-events: none; }
 
         .loader-star {
-            font-size: 52px;
-            animation: spinGlow 1.5s linear infinite;
+            font-size: 56px;
+            animation: spinGlow 2s linear infinite;
+            filter: drop-shadow(0 0 12px var(--gold-bright));
         }
 
         .loader-text {
             color: var(--gold-bright);
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 600;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
             animation: pulse 1s ease-in-out infinite alternate;
         }
 
         .loader-bar-track {
-            width: 200px;
-            height: 8px;
-            background: var(--wood-mid);
+            width: 220px;
+            height: 6px;
+            background: rgba(255,255,255,0.08);
             border-radius: 99px;
             overflow: hidden;
-            border: 1px solid var(--wood-grain);
+            border: 1px solid rgba(255,215,0,0.2);
         }
 
         .loader-bar-fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, var(--gold-mid), var(--gold-bright));
+            background: linear-gradient(90deg, var(--gold-warm), var(--gold-bright));
             border-radius: 99px;
             transition: width 0.3s ease;
+            box-shadow: 0 0 8px var(--gold-bright);
         }
 
         @keyframes spinGlow {
-            0%   { transform: rotate(0deg);   filter: drop-shadow(0 0 6px var(--gold-bright)); }
-            50%  { filter: drop-shadow(0 0 18px var(--gold-bright)); }
-            100% { transform: rotate(360deg); filter: drop-shadow(0 0 6px var(--gold-bright)); }
+            0%   { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-
         @keyframes pulse {
-            from { opacity: 0.6; }
+            from { opacity: 0.5; }
             to   { opacity: 1.0; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-6px); }
+        }
+        @keyframes goldShimmer {
+            0%   { background-position: -200% center; }
+            100% { background-position:  200% center; }
+        }
+        @keyframes panelReveal {
+            from { opacity: 0; transform: scale(0.88) translateY(20px); }
+            to   { opacity: 1; transform: scale(1)    translateY(0); }
+        }
+        @keyframes borderPulse {
+            0%, 100% { box-shadow:
+                0 0 0 1px var(--gold-dark),
+                0 0 0 3px var(--panel-bg-3),
+                0 0 0 5px var(--gold-warm),
+                0 0 30px var(--gold-glow),
+                0 0 80px var(--gold-glow-soft),
+                inset 0 0 60px rgba(0,0,0,0.6);
+            }
+            50% { box-shadow:
+                0 0 0 1px var(--gold-dark),
+                0 0 0 3px var(--panel-bg-3),
+                0 0 0 5px var(--gold-bright),
+                0 0 45px var(--gold-glow),
+                0 0 100px rgba(255,215,0,0.25),
+                inset 0 0 60px rgba(0,0,0,0.6);
+            }
         }
 
         /* ═══════════════════════════════════════════════
@@ -136,7 +176,6 @@
             font-size: 64px;
             font-weight: 600;
             color: #fff;
-            /* Thick stroke via stacked text-shadows */
             text-shadow:
                  2px  2px 0 #000,
                 -2px -2px 0 #000,
@@ -151,7 +190,7 @@
         }
 
         /* ═══════════════════════════════════════════════
-           PANEL SYSTEM (WOODEN PLAQUE)
+           OVERLAY BACKDROP
         ═══════════════════════════════════════════════ */
         .panel-overlay {
             position: fixed;
@@ -160,176 +199,294 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(0,0,0,0.30);
-            backdrop-filter: blur(2px);
+            background: rgba(4, 10, 22, 0.72);
+            backdrop-filter: blur(4px) saturate(0.8);
         }
-
         .panel-overlay.hidden { display: none; }
 
-        .wood-panel {
+        /* ═══════════════════════════════════════════════
+           RAMADAN PANEL — THE ISLAMIC ARCH FRAME
+        ═══════════════════════════════════════════════ */
+        .ramadan-panel {
             position: relative;
+            width: 92vw;
+            max-width: 400px;
+            text-align: center;
+            padding: 0 0 36px;
+
+            /* Deep midnight-blue body with subtle geometric tiling */
             background:
-                /* Wood grain overlay */
-                repeating-linear-gradient(
-                    92deg,
-                    transparent,
-                    transparent 18px,
-                    rgba(0,0,0,0.04) 18px,
-                    rgba(0,0,0,0.04) 19px
+                /* Arabesque star lattice — 8-pt star via layered gradients */
+                repeating-conic-gradient(
+                    from 0deg at 50% 50%,
+                    rgba(255,215,0,0.028) 0deg 45deg,
+                    transparent 45deg 90deg
                 ),
-                /* Main gradient */
-                linear-gradient(170deg,
-                    #6D4C41 0%,
-                    #4E342E 30%,
-                    #3E2723 60%,
-                    #2C1A10 100%
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(255,215,0,0.018) 0px, rgba(255,215,0,0.018) 1px,
+                    transparent 1px, transparent 28px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(255,215,0,0.018) 0px, rgba(255,215,0,0.018) 1px,
+                    transparent 1px, transparent 28px
+                ),
+                /* Radial depth — lighter at top center, dark at edges */
+                radial-gradient(ellipse at 50% 0%,
+                    #163354 0%,
+                    #0D1F38 40%,
+                    #071220 100%
                 );
 
-            /* Layered border: brass outer + dark inner */
-            border: 3px solid var(--wood-darkest);
-            outline: 3px solid var(--gold-bright);
-            outline-offset: -6px;
+            /* Double gold border: thin bright outer, gap (panel bg), thicker warm inner */
+            border: 2px solid var(--gold-bright);
+            outline: 5px solid var(--panel-bg-3);
+            outline-offset: -7px;
 
-            border-radius: 18px;
-            padding: 36px 52px 40px;
-            min-width: 320px;
-            max-width: 420px;
-            width: 90vw;
-            text-align: center;
+            border-radius: 18px 18px 14px 14px;
 
-            /* Metallic glow */
+            /* Animated glow */
             box-shadow:
-                0 0 0 6px var(--wood-darkest),
-                0 0 28px var(--gold-glow),
-                0 12px 40px var(--shadow-heavy),
-                inset 0 1px 0 rgba(255,255,255,0.08);
-
-            animation: panelPop 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+                0 0 0 1px var(--gold-dark),
+                0 0 0 3px var(--panel-bg-3),
+                0 0 0 5px var(--gold-warm),
+                0 0 30px var(--gold-glow),
+                0 0 80px var(--gold-glow-soft),
+                inset 0 0 60px rgba(0,0,0,0.6);
+            animation:
+                panelReveal 0.42s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+                borderPulse 3s ease-in-out 0.5s infinite;
         }
 
-        @keyframes panelPop {
-            from { opacity: 0; transform: scale(0.82) translateY(16px); }
-            to   { opacity: 1; transform: scale(1)    translateY(0); }
+        /* ── Islamic Arch Header Band ── */
+        .ramadan-panel .arch-header {
+            position: relative;
+            background: linear-gradient(160deg,
+                #1a3a5c 0%,
+                #0e2340 50%,
+                #0a1829 100%
+            );
+            border-bottom: 2px solid var(--gold-warm);
+            border-radius: 16px 16px 0 0;
+            padding: 22px 24px 18px;
+            /* Top edge gold bar */
+            box-shadow:
+                inset 0 1px 0 rgba(255,215,0,0.3),
+                0 4px 12px rgba(0,0,0,0.5);
         }
 
-        /* Corner bolts */
-        .wood-panel::before,
-        .wood-panel::after {
-            content: '⬡';
+        /* Corner diamond ornaments (pure CSS) */
+        .ramadan-panel .arch-header::before,
+        .ramadan-panel .arch-header::after {
+            content: '◆';
             position: absolute;
-            color: var(--gold-dark);
-            font-size: 16px;
-            top: 10px;
+            top: 14px;
+            font-size: 13px;
+            color: var(--gold-warm);
+            opacity: 0.75;
+            text-shadow: 0 0 8px var(--gold-bright);
+        }
+        .ramadan-panel .arch-header::before { left: 14px; }
+        .ramadan-panel .arch-header::after  { right: 14px; }
+
+        /* ── Crescent Icon ── */
+        .panel-icon {
+            font-size: 42px;
             line-height: 1;
-            opacity: 0.7;
-        }
-        .wood-panel::before { left: 12px; }
-        .wood-panel::after  { right: 12px; }
-
-        /* ─── Panel Header ─── */
-        .panel-crescent {
-            font-size: 36px;
-            margin-bottom: 4px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
-        }
-
-        .panel-title {
-            font-size: 46px;
-            font-weight: 600;
-            color: var(--gold-bright);
-            letter-spacing: 1px;
-            line-height: 1.1;
-            text-shadow:
-                2px 3px 0 var(--wood-darkest),
-                0 0 20px var(--gold-glow);
+            filter: drop-shadow(0 0 10px var(--gold-bright))
+                    drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+            animation: float 3s ease-in-out infinite;
+            display: block;
             margin-bottom: 6px;
         }
 
-        .panel-title.danger { color: var(--red-alert); text-shadow: 2px 3px 0 var(--wood-darkest); }
-
-        .panel-subtitle {
-            font-size: 17px;
-            color: var(--text-on-wood);
-            opacity: 0.85;
-            margin-bottom: 28px;
-            letter-spacing: 0.5px;
+        /* ── Panel Title ── */
+        .panel-title {
+            font-size: 44px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            line-height: 1.1;
+            margin-bottom: 2px;
+            /* Shimmer gradient text */
+            background: linear-gradient(
+                90deg,
+                var(--gold-dark)    0%,
+                var(--gold-bright)  25%,
+                #fff8c0             50%,
+                var(--gold-bright)  75%,
+                var(--gold-dark)   100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: goldShimmer 3.5s linear infinite;
+        }
+        .panel-title.danger {
+            background: linear-gradient(90deg, #ff6b6b, #ff0000, #ff6b6b);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: goldShimmer 2.5s linear infinite;
         }
 
-        /* ─── Stat Row ─── */
+        .panel-subtitle {
+            font-size: 15px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ── Ornamental Divider ── */
+        .panel-divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 28px 0;
+        }
+        .panel-divider::before,
+        .panel-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-warm));
+        }
+        .panel-divider::after {
+            background: linear-gradient(90deg, var(--gold-warm), transparent);
+        }
+        .panel-divider span {
+            color: var(--gold-bright);
+            font-size: 16px;
+            line-height: 1;
+            filter: drop-shadow(0 0 6px var(--gold-bright));
+        }
+
+        /* ── Body (below arch header) ── */
+        .ramadan-panel .panel-body {
+            padding: 24px 28px 0;
+        }
+
+        /* ── Stat Boxes (Parchment Scrolls) ── */
         .stats-row {
             display: flex;
             justify-content: center;
-            gap: 16px;
-            margin-bottom: 28px;
+            gap: 14px;
+            margin-bottom: 26px;
         }
 
         .stat-box {
             flex: 1;
-            background: rgba(0,0,0,0.35);
-            border: 1px solid var(--wood-grain);
+            position: relative;
+            background:
+                linear-gradient(160deg, #1c2e42 0%, #0f1e2e 100%);
+            border: 1px solid var(--gold-warm);
             border-radius: 10px;
-            padding: 12px 16px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+            padding: 14px 12px 12px;
+            /* Inset engraving effect */
+            box-shadow:
+                inset 0 2px 8px rgba(0,0,0,0.6),
+                inset 0 1px 0 rgba(255,215,0,0.08),
+                0 1px 0 rgba(255,215,0,0.15);
+        }
+        /* Tiny corner notches */
+        .stat-box::before {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            border: 1px solid rgba(255,215,0,0.1);
+            border-radius: 7px;
+            pointer-events: none;
         }
 
         .stat-label {
-            color: #8D6E63;
-            font-size: 11px;
-            letter-spacing: 1.5px;
+            color: var(--gold-warm);
+            font-size: 10px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
+            opacity: 0.8;
         }
-
         .stat-value {
             color: #fff;
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 600;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            line-height: 1;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+        }
+        .stat-value.gold {
+            background: linear-gradient(180deg, #fff8a0 0%, var(--gold-bright) 60%, var(--gold-warm) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 6px rgba(255,215,0,0.5));
         }
 
-        .stat-value.gold { color: var(--gold-bright); }
-
-        /* ─── Button ─── */
-        .btn-wood {
+        /* ── Golden Bar Button ── */
+        .btn-gold {
             display: inline-block;
-            background: linear-gradient(to bottom, #FFD54F 0%, #FFB300 50%, #FF8F00 100%);
+            position: relative;
+            background: linear-gradient(
+                180deg,
+                #fff3a0 0%,
+                #ffd700 20%,
+                #e8a000 60%,
+                #b87800 85%,
+                #8a5c00 100%
+            );
             border: none;
-            border-radius: 32px;
-            padding: 14px 52px;
+            border-radius: 8px;
+            padding: 0;
+            width: 85%;
+            cursor: pointer;
+            -webkit-appearance: none;
+            /* 3D base shadow */
+            box-shadow:
+                0 6px 0 #5a3800,
+                0 8px 20px rgba(0,0,0,0.6),
+                inset 0 1px 0 rgba(255,255,220,0.5);
+            transition: transform 0.08s, box-shadow 0.08s;
+        }
+        .btn-gold::before {
+            /* Engraved inner stroke */
+            content: '';
+            position: absolute;
+            inset: 2px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,200,0.25);
+            pointer-events: none;
+        }
+        .btn-gold span {
+            display: block;
+            padding: 13px 32px;
             font-family: 'Fredoka', sans-serif;
             font-size: 22px;
             font-weight: 600;
-            color: var(--wood-darkest);
-            cursor: pointer;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            /* 3D effect */
+            color: #2C1600;
+            text-shadow: 0 1px 0 rgba(255,255,180,0.6);
+        }
+        .btn-gold:hover {
+            background: linear-gradient(
+                180deg,
+                #fffac8 0%,
+                #ffe433 20%,
+                #f0b800 60%,
+                #c08800 85%,
+                #9a6a00 100%
+            );
             box-shadow:
-                0 6px 0 #E65100,
-                0 8px 12px rgba(0,0,0,0.4);
-            transition: box-shadow 0.08s, transform 0.08s;
-            -webkit-appearance: none;
+                0 6px 0 #5a3800,
+                0 10px 28px rgba(255,215,0,0.35),
+                inset 0 1px 0 rgba(255,255,220,0.5);
         }
-
-        .btn-wood:active,
-        .btn-wood.pressed {
-            transform: translateY(4px);
+        .btn-gold:active {
+            transform: translateY(5px);
             box-shadow:
-                0 2px 0 #E65100,
-                0 3px 6px rgba(0,0,0,0.3);
-        }
-
-        .btn-wood:hover {
-            background: linear-gradient(to bottom, #FFE082 0%, #FFD740 50%, #FFA000 100%);
-        }
-
-        /* ─── Divider ─── */
-        .panel-divider {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
-            margin: 0 0 24px;
-            opacity: 0.5;
+                0 1px 0 #5a3800,
+                0 3px 8px rgba(0,0,0,0.4);
         }
 
         /* Utility */
@@ -355,32 +512,41 @@
 
     <!-- ══════════════ MAIN MENU ══════════════ -->
     <div id="screen-menu" class="panel-overlay">
-        <div class="wood-panel">
-            <div class="panel-crescent">☪️</div>
-            <div class="panel-title">HAFIZ HAVADA</div>
-            <div class="panel-subtitle">Ramazan Özel ✨</div>
-            <div class="panel-divider"></div>
-            <button class="btn-wood" id="btn-start">BAŞLA</button>
+        <div class="ramadan-panel">
+            <div class="arch-header">
+                <span class="panel-icon">☪</span>
+                <div class="panel-title">HAFIZ HAVADA</div>
+                <div class="panel-subtitle">✦ Ramazan Özel ✦</div>
+            </div>
+            <div class="panel-body">
+                <div class="panel-divider"><span>✦</span></div>
+                <button class="btn-gold" id="btn-start"><span>BAŞLA</span></button>
+            </div>
         </div>
     </div>
 
     <!-- ══════════════ GAME OVER SCREEN ══════════════ -->
     <div id="screen-gameover" class="panel-overlay hidden">
-        <div class="wood-panel">
-            <div class="panel-crescent">💫</div>
-            <div class="panel-title danger">OYUN BİTTİ</div>
-            <div class="panel-divider"></div>
-            <div class="stats-row">
-                <div class="stat-box">
-                    <div class="stat-label">SKOR</div>
-                    <div class="stat-value" id="final-score">0</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">EN İYİ</div>
-                    <div class="stat-value gold" id="best-score">0</div>
-                </div>
+        <div class="ramadan-panel">
+            <div class="arch-header">
+                <span class="panel-icon">🏮</span>
+                <div class="panel-title danger">OYUN BİTTİ</div>
+                <div class="panel-subtitle">✦ Tekrar dene ✦</div>
             </div>
-            <button class="btn-wood" id="btn-retry">TEKRAR DENE</button>
+            <div class="panel-body">
+                <div class="panel-divider"><span>✦</span></div>
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <div class="stat-label">Skor</div>
+                        <div class="stat-value" id="final-score">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">En İyi</div>
+                        <div class="stat-value gold" id="best-score">0</div>
+                    </div>
+                </div>
+                <button class="btn-gold" id="btn-retry"><span>TEKRAR DENE</span></button>
+            </div>
         </div>
     </div>
 
@@ -414,17 +580,17 @@
         BG_PARALLAX_SPEED: 0.5,
 
         // Pipes
-        PIPE_SPAWN_DIST:   380,   // px between pipe leading edges
-        PIPE_GAP:          205,   // vertical gap between top & bottom pipe
-        PIPE_WIDTH:         95,   // for collision & fallback rendering
-        PIPE_MIN_TOP:      115,   // min height for top pipe
+        PIPE_SPAWN_DIST:   360,   // px between pipe leading edges
+        PIPE_GAP:          200,   // vertical gap between top & bottom pipe
+        PIPE_WIDTH:         85,
+        PIPE_MIN_TOP:      100,   // min height for top pipe
         PIPE_MAX_BOTTOM_CLEAR: 100, // pixels of clear space above the floor
 
-        // Bird — visually balanced size
-        BIRD_W: 78,
-        BIRD_H: 70,
+        // Bird — large & chunky, clearly visible
+        BIRD_W: 85,
+        BIRD_H: 65,
         BIRD_START_X: 110,
-        BIRD_HITBOX_SHRINK: 10,   // px inset on each side for forgiving hitbox
+        BIRD_HITBOX_SHRINK: 13,   // px inset on each side for forgiving hitbox
 
         // Camera shake
         SHAKE_FRAMES:  22,
