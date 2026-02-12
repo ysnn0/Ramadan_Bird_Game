@@ -1,35 +1,46 @@
-# Ramadan Bird Game
+# 🌙 Hafız Havada — Ramazan Özel
 
-## Game Description
-Ramadan Bird Game is an exciting and educational platformer game designed to entertain players while teaching them about the significance of Ramadan. Players engage in various challenges that highlight the values and traditions of the holy month.
+![Durum](https://img.shields.io/badge/Durum-Tamamland%C4%B1-success?style=for-the-badge)
+![Teknoloji](https://img.shields.io/badge/Teknoloji-HTML5%20Canvas%20%7C%20ES6%2B-blue?style=for-the-badge)
+![Tema](https://img.shields.io/badge/Tema-Ramazan-gold?style=for-the-badge)
 
-## Features
-- **Engaging Gameplay**: Multiple levels with unique challenges.
-- **Educational Content**: Learn about Ramadan traditions while playing.
-- **Colorful Graphics**: Visually appealing art style.
-- **Leaderboard**: Compete with friends and family.
-- **User-friendly Interface**: Easy to navigate menus and controls.
+**Hafız Havada**, Ramazan ayına özel olarak tasarlanmış, HTML5 Canvas teknolojisi üzerine kurulu, modern ve atmosferik bir arcade oyunudur. Flappy Bird mekaniklerinden esinlenilen bu oyun, özel İslami motifler, altın varaklı arayüz tasarımları ve akıcı fizik motoru ile geliştirilmiştir.
 
-## How to Play
-1. Start the game and select your level from the main menu.
-2. Use the arrow keys to navigate your bird character.
-3. Collect stars and avoid obstacles to score points.
-4. Complete all challenges to win the game!
+---
 
-## Technology Stack
-- **Programming Language**: JavaScript
-- **Game Engine**: Phaser.js
-- **Graphics**: Adobe Illustrator
-- **Sound**: Audacity
+## 🎮 Oynanış ve Özellikler
 
-## Installation Instructions
-1. Clone the repository: `git clone https://github.com/ysnn0/Ramadan_Bird_Game.git`
-2. Navigate to the project directory: `cd Ramadan_Bird_Game`
-3. Install the required packages: `npm install`
-4. Start the game: `npm start` and open `http://localhost:3000` in your web browser.
+Bu proje, standart bir web oyununun ötesinde, kullanıcı deneyimini (UX) ve görsel estetiği ön planda tutar.
 
-## Contributing
-Contributions are welcome! Please adhere to the project's code of conduct and submit pull requests to contribute to the game.
+* **Ramazan Teması:** Koyu lacivert, zümrüt yeşili ve altın renk paletiyle (Design Tokens kullanılarak) tasarlanmış atmosferik arayüz.
+* **Responsive Tasarım:** Hem masaüstü (Mouse/Klavye) hem de mobil dokunmatik ekranlarda (Touch Events) kusursuz çalışır.
+* **Gelişmiş Fizik Motoru:** Yerçekimi, süzülme (lift) ve çarpışma testleri (hitbox) içeren özel fizik hesaplamaları.
+* **Yüksek Skor Sistemi:** Oyuncunun en yüksek skorunu tarayıcı hafızasında (`localStorage`) saklar.
+* **Asset Loader:** Görseller yüklenmeden oyunun başlamasını engelleyen, `Promise` tabanlı güvenli yükleme sistemi.
+* **Fallback Sistemi:** Eğer görseller yüklenemezse, oyun otomatik olarak Canvas çizimleriyle (renkli kutular) çalışmaya devam eder.
 
-## License
-This project is licensed under the MIT License.
+---
+
+## 🛠️ Kullanılan Teknolojiler
+
+Proje herhangi bir oyun motoru (Unity, Phaser vb.) kullanılmadan, tamamen **Vanilla JavaScript** ile geliştirilmiştir.
+
+* **Core:** HTML5 Canvas API
+* **Dil:** JavaScript (ES6+ Classes)
+* **Stil:** CSS3 (CSS Variables, Flexbox, Keyframe Animations)
+* **Ses:** HTML5 Audio API
+
+---
+
+## 📂 Proje Yapısı
+
+Oyunun kod mimarisi Nesne Yönelimli (OOP) prensiplere göre modüler parçalara ayrılmıştır:
+
+```text
+HafizHavada/
+│
+├── index.html          # Tüm oyun kodu (HTML/CSS/JS) tek dosya yapısındadır.
+├── rt.png              # Arka plan görseli (Seamless Loop)
+├── dragon.png          # Karakter görseli (Hafız/Kuş)
+├── br.png              # Engel/Boru görseli
+└── müzik.mp3           # Arka plan müziği
